@@ -17,35 +17,17 @@
 # Pages such as community.md use this data.
 # Please keep the list in alphabetical order.
 #
-- name: DB Tsai
-  apacheId: dbtsai
-  githubId: dbtsai
-  role: PMC
-  org: Netflix
-
-- name: Julian Hyde
-  apacheId: jhyde
-  githubId: julianhyde
-  org: Hortonworks
-  role: Contributor
-  homepage: http://people.apache.org/~jhyde
 
 - name: Luciano Resende
   apacheId: lresende
   githubId: lresende
   org: IBM
-  role: Committer and Mentor
+  role: Contributor
 
-- name: Reynold Xin
-  apacheId: rxin
-  githubId: rxin
-  org: Databricks
-  role: Committer and Mentor
-
-- name: Rich Bowen
-  apacheId: rbowen
-  githubId: rbowen
-  org:
-  role: Mentor
+- name: Stian Soiland-Reyes
+  apacheId: stain
+  githubId: stain
+  org: University of Manchester
+  role: Contributor
 
 # End contributors.yml

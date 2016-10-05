@@ -24,9 +24,9 @@ limitations under the License.
 
 {% include JB/setup %}
 
-## Apache SystemML
+## Apache Example
 
-SystemML provides declarative large-scale machine learning (ML) that aims at flexible specification 
+Example provides declarative large-scale machine learning (ML) that aims at flexible specification 
 of ML algorithms and automatic generation of hybrid runtime plans ranging from single node, 
 in-memory computations, to distributed computations on Apache Hadoop and  Apache Spark. 
 ML algorithms are expressed in a R or Python syntax, that includes linear algebra primitives, statistical functions, 
