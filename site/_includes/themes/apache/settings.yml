@@ -13,20 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-.idea
-.sass-cache
-.jekyll-metadata
-*.iml
-*~
-*.class
-target
-.mtj.tmp/
-*.jar
-*.war
-*.ear
-hs_err_pid*
-*.iml
-.settings
-.classpath
-.project
-*.orig
+theme :
+  name : apache
