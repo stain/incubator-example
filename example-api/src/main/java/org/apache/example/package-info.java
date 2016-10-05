@@ -19,8 +19,6 @@
  * Example API
  * <p>
  * This defines the API of the fictional Apache Example.
- * <p>
- * 
  * 
  */
 package org.apache.example;
