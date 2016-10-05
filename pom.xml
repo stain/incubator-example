@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements. See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership. The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!--
+NOTE: All *.xml files should have an ASF license header like above
+unless their license differs.
+
+To ensure the file is recognized as XML we have the <?xml line
+ABOVE the ASF header. - and the ASF header
+BEFORE the top level <element>
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+<!--
+TIP: See https://maven.apache.org/pom.html#Developers for details
+of all elements/attributes allowed in pom.xml
+-->
+
+  <prerequisites>
+    <!-- Specify the minimum Maven version your plugins require -->
+    <maven>3.2</maven>
+  </prerequisites>
+
+  <parent>
+    <!--
+    Apache super-parent contain useful defaults on things like <licenses>
+    <distributionManagement> and build plugins.
+
+    For the latest parent, see http://repo.maven.apache.org/maven2/org/apache/apache/
+
+    Run mvn help:effective-pom to see what is the result of the inheritance
+    -->
+      <groupId>org.apache</groupId>
+      <artifactId>apache</artifactId>
+      <version>18</version>
+  </parent>
+
+  <!-- The groupId SHOULD match the Apache project's name
+  but MAY be further nested (e.g. if the project have
+  multiple git erpositories)
+  -->
+  <groupId>org.apache.example</groupId>
+
+  <!-- This "apache-"" prefix in the top-level parent artifactId
+       means we will produce releases like
+       apache-example-0.1.0-incubating-source-release.zip
+       without having to tweak <finalName> or assembly files.
+
+       An alternative is to make a example-dist
+       sub-module with its own Assembly config and <finalName>, which can
+       allow more fine-grained control of what is included
+       in the release (e.g. exclude some modules).
+
+  -->
+  <artifactId>apache-example</artifactId>
+
+  <!-- NOTE: While in the incubator, the version should always include a
+  "-incubating" suffix. -->
+  <version>0.1.0-incubating-SNAPSHOT</version>
+
+  <!-- This example is a multi-module project, change to
+  <packaging>jar</packaging> for simpler projects -->
+  <packaging>pom</packaging>
+
+  <name>Apache Example</name>
+  <description>Apache Example is a template "project" from the Apache Incubator
+    to showcase best practice in how to structure, release and promote an
+    open source project, in particular for new podlings in the Incubator.
+    This Maven project assumes access to apache.org developer resources
+    and would have to be modified for third-party use.
+  </description>
+
+  <!-- Canonical URL for the project SHOULD include the
+  .incubator name and SHOULD be on secure https
+  (avoid man-in-middle attack for download page's links to signatures).
+
+  The www. prefix is NOT generally used by apache.org projects.
+  -->
+  <url>https://example.incbuator.apache.org/</url>
+
+  <properties>
+    <!-- The Apache Maven parent already defines useful defaults such as
+    project.build.sourceEncoding UTF-8
+    but we will probably want to change the JDK version:
+  -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <!-- Ensure same dependency versions across our modules.
+         It is also possible to use <dependencyManagement>, but that
+         could accidentally downgrade a transient dependency.
+    -->
+    <commons.lang.version>2.6</commons.lang.version>
+
+  </properties>
+
+  <mailingLists>
+    <!-- Note: These lists don't exist - for comments on Apache Extra
+    use instead the genreal Incubator list:
+
+    general@incubator.apache.org
+    https://lists.apache.org/list.html?general@incubator.apache.org
+  -->
+    <mailingList>
+      <name>Apache Example development</name>
+      <subscribe>dev-subscribe@example.incubator.apache.org</subscribe>
+      <unsubscribe>dev-unsubscribe@example.incubator.apache.org</unsubscribe>
+      <post>dev@example.incubator.apache.org</post>
+      <archive>https://lists.apache.org/list.html?dev@example.apache.org</archive>
+    </mailingList>
+    <mailingList>
+      <name>Apache Example comimt notifications</name>
+      <subscribe>commits-subscribe@example.incubator.apache.org</subscribe>
+      <unsubscribe>commits-unsubscribe@example.incubator.apache.org</unsubscribe>
+      <post>commits@example.incubator.apache.org</post>
+      <archive>https://lists.apache.org/list.html?commits@example.apache.org</archive>
+    </mailingList>
+    <!-- NOTE: some projects also have lists like users@ and notifications@ -->
+
+  </mailingLists>
+
+  <scm>
+    <!--
+    NOTE: Official "UI" for the Git repository is at
+    https://git-wip-us.apache.org/repos/asf/incubator-example.git
+    but we think linking to the GitHub mirror is more useful for
+    browsing the code.  Clone and comimt URLs should however
+    be at git-wip-us.apache.org. Don't forget https!
+    -->
+      <url>https://github.com/apache/incubator-example</url>
+      <connection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-example.git</connection>
+      <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-example.git</developerConnection>
+      <tag>HEAD</tag>
+  </scm>
+
+  <issueManagement>
+      <system>Jira</system>
+      <url>https://issues.apache.org/jira/browse/EXAMPLE</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>travis</system>
+    <url>https://travis-ci.org/apache/incubator-example/</url>
+
+    <!-- Or:
+    <system>jenkins</system>
+    <url>https://builds.apache.org/job/incubator-example/</url>
+  -->
+  </ciManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>3.2.0</version>
+        <!-- enable <packaging>bundle</packaging> for OSGi users -->
+        <extensions>true</extensions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <!-- mvn apache-rat:check
+        is useful for testing license headers of our files
+        -->
+        <artifactId>apache-rat-plugin</artifactId>
+        <!-- <version>0.11</version> -->
+        <configuration>
+          <!-- files which RAT should not check license headers of -->
+          <excludes combine.children="append">
+            <!-- best practice is to list each and say why it's OK.-->
+
+            <!-- BSD-3, see LICENSE -->
+            <exclude>example-impl/src/main/resources/style.css</exclude>
+			
+			<!-- tiny file, just list of class names -->
+			<exclude>**/src/main/resources/META-INF/services/*</exclude>
+
+            <!-- JSON does not support comments, these are all made at ASF -->
+            <exclude>**/*.json</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- Common depenendices - keep this list short! -->
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!--
+  See https://maven.apache.org/pom.html#Developers
+
+  One challenge for projects is that there could be multiple
+  places to track who the prople in the project are.
+
+  Maven's <developers> section can however be useful if instead of Jekyll
+  you are using the Maven Site plugin, as it would then
+  populate the "Project Team" page. It can be tricky to maintain such a
+  list if the project have multiple git repositories.
+  -->
+  <developers>
+    <developer>
+        <id>stain</id> <!-- Should match @apache.org username -->
+        <name>Stian Soiland-Reyes</name>
+        <!-- you can also use anti-spam messures like [at] or [dot] -->
+        <email>stain@apache.org</email>
+        <url>http://orcid.org/0000-0001-9842-9718</url>
+        <roles>
+            <!-- You may also want to list who is your <role>mentor</role> -->
+            <role>Committer</role>
+            <role>PPMC Member</role>
+        </roles>
+        <timezone>+0</timezone>
+    </developer>
+  </developers>
+  <!-- Don't forget contributors who are not (yet) committers!
+  (e.g. people who sent in pull requests or helped flesh out the architecture)
+  -->
+  <contributors>
+    <contributor>
+      <name>Luciano Resende</name>
+      <email>lresende@apache.org</email>
+    </contributor>
+  </contributors>
+
+  <!-- apache.snapshots is normally inherited from Apache super-parent,
+  uncomment below if you have your own -SNAPSHOT <parent> from a different
+  git repository.
+
+  <repositories>
+    <repository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>https://repository.apache.org/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
+  -->
+
+
+  <modules>
+    <!--
+    Example Maven sub-modules.
+
+    There's no rules for what modules you should have or what they should be
+    called; however we recommend you name them all with the repository
+    name (minus "incubator-") so that it matches their inner
+    <artifactId>.  No apache- prefix here!
+  -->
+
+    <module>example-api</module>
+    <module>example-impl</module>
+  </modules>
+</project>
